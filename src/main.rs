@@ -12,6 +12,8 @@ fn main() {
 
 
     let my_string:String   = String::from("Hello, World");
-    println!("{}", my_string)
+    println!("{}", my_string);
+
+
 
 }
