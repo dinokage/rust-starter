@@ -1,7 +1,7 @@
 // use std::io::stdin;
 
 //structures have camelcase names
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 struct User {
     id: i64,
     username: String,
@@ -10,12 +10,13 @@ struct User {
 
 }
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 enum Stack {
     JS,
     Rust,
     Go,
-    Python
+    Python,
+    Hacker
 }
 fn main() {
     // let mut message:String = String::new();
@@ -100,7 +101,7 @@ fn main() {
 
     //combining structs with .. operator
 
-let tarun = User {
+let tarun: User = User {
     id: 80086,
     username: String::from("scoobygamur"),
     ..dino
@@ -108,17 +109,39 @@ let tarun = User {
 
 println!("tarun : {:?}", tarun);
 
+// moves and copies
 
+let a:i32 = 69;
+let b: i32 = a;
+println!("{}",a);
+println!("{}",b);
 
+// primitive values are implicitly copied
 
+let string_1: String = String::from("Sulchik");
+let string_2: String = string_1;
 
+//println!("string 1 is now gone lmao{}", string_1);
+println!("string 2 exists : {}", string_2);
 
+// strings are implicitly moved
 
+// for copying, we use .clone() method (also referred to as deep copy)
 
+let string_3  = string_2.clone();
+println!("both string_2 and string_3 exist now : {} {}", string_2, string_3);
 
+// values stored in stack are copied by default. values stored in heap are moved by default
+// as strings are of variable size they are stored in heap
+{
+    let random_string: String = String::from("Sulli");
+}
+// println!("{}", random_string);
+// a variable is fdropped once ir exits it's scope
 
-
-
-
-
+let karna: User = User { id: 80087, username: String::from("cpt.karna"), skills: ["Ethukelli Hacking".to_string(), "Mind Reading".to_string(), "Hadavidi".to_string()], stack:  Stack::Hacker};
+// for some reason .clone() method didn't work with my struct
+//  it worked :) [had to include "Clone" in derive attribute for struct and enum]
+let puchakai: User = karna.clone();
+println!("{:?} {:?}" ,karna ,puchakai);
 }
